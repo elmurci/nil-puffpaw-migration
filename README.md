@@ -1,0 +1,117 @@
+# nilDB <> Puffpaw
+
+This code uploads a record to `nilDB` with the fields present in the Postgres
+database.
+
+This the format:
+
+```
+{
+  "id": 1,
+  "user_id": 8,
+  "vape_id": {
+    "%allot": "1188337089977745"
+  },
+  "pod_id": "130024",
+  "pod_type": {
+    "%allot": "A"
+  },
+  "pod_flavour": {
+    "%allot": "2"
+  },
+  "pod_remaining":  {
+    "%allot": 992
+  },
+  "pod_nicotine_level": "2",
+  "puff_duration": 1,
+  "raw_data": "a10211016818448d0a0001fbe8020203e099aabb05ba",
+  "timestamp": {
+    "%allot": "2025-05-05 04:54:37"
+  },
+  "ip": {
+    "%allot": "52.78.45.72"
+  },
+  "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_3_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Version/3.9.1  Bluefy/3.9.1",
+  "request_data": {
+    "nonce": "1746446068899",
+    "ble_id": "1E92A849-A1E2-ED21-5208-5D5D260F736D",
+    "pod_id": "A130024",
+    "source": "cf.submit.error.fix",
+    "ble_mac": "267388127939300",
+    "vape_id": "1188337089977745",
+    "ble_name": "Puffpaw-e4a",
+    "raw_data": "a10211016818448d0a0001fbe8020203e099aabb05ba",
+    "timestamp": 1746420877000,
+    "session_id": "1746446027254",
+    "app_version": "av:1.0.0;dpv:1.0.0;dv:020108KD601",
+    "local_datetime": "America/Los_Angeles;7;2025-05-05T11:54:38.889Z"
+  },
+  "ble_id": "1E92A849-A1E2-ED21-5208-5D5D260F736D",
+  "ble_name": "Puffpaw-e4a",
+  "ble_mac": "267388127939300",
+  "session_id": "1746446027254",
+  "app_version": "av:1.0.0;dpv:1.0.0;dv:020108KD601",
+  "nonce": "1746446068899",
+  "valid": true,
+  "nft_token_id": {
+    "%allot": 423
+  },
+  "nft_tier": 1,
+  "local_datetime": "America/Los_Angeles;7;2025-05-05T11:54:38.889Z",
+  "source": "cf.submit.error.fix",
+  "uploaded_at": "2025-05-05 11:54:38.889",
+  "is_settled": false,
+  "settled_metadata": {},
+  "is_delayed_upload": false,
+  "flag": "",
+  "lease_id": 3210,
+  "lease_metadata": {
+    "lease_id": 3210
+  },
+  "count": 1,
+  "created_at": "2025-05-05 11:56:50.225",
+  "updated_at": "2025-05-05 11:56:50.225"
+}
+```
+
+The secret shared fields here are `vape_id`, `pod_type`, `pod_flavour`,
+`pod_remaining`, `timestamp`, `ip` and `nft_token_id`.
+
+In case more fields are needed to be secret shared, that can be done by creating
+a new schema:
+
+```
+"new_field": {
+    "type": "object",
+    "properties": {
+    "%share": {
+        "type": "string"
+    }
+    },
+    "required": ["%share"]
+}
+```
+
+and adding the `%allot` section:
+
+```
+"new_field": {
+    "%allot": "423"
+}
+```
+
+## Code flow
+
+1. Creates a builder client
+2. If a collection is not set in the env variables, a new one is created
+3. Creates a user
+4. The builder grants access to the user so it can write data
+5. The user writes data in the schema format (in this example, the builder is
+   given access to this data, but we can also set `acl.read` to `false` and
+   grant access to the builder at a later stage)
+
+## Usage
+
+1. Copy `.env.example` to `.env` and populate the variables
+2. Install dependencies: `pnpm i`
+3. Run `pnpm large-migrate`
