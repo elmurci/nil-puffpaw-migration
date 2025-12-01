@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PuffPaw schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+        "id": {
+          "type": "number"
+        },
+        "user_id": {
+          "type": "number"
+        },
+        "vape_id": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "pod_type": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "pod_flavour": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "pod_remaining": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "pod_nicotine_level": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "puff_duration": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "timestamp": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "ip": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "ble_name": {
+          "type": "string"
+        },
+        "app_version": {
+          "type": "string"
+        },
+        "valid": {
+          "type": "boolean"
+        },
+        "nft_token_id": {
+          "type": "object",
+          "properties": {
+            "%share": {
+              "type": "string"
+            }
+          },
+          "required": ["%share"]
+        },
+        "nft_tier": {
+          "type": "number"
+        },
+        "local_datetime": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "uploaded_at": {
+          "type": "string"
+        },
+        "is_settled": {
+          "type": "boolean"
+        },
+        "settled_metadata": {
+          "type": "object"
+        },
+        "is_delayed_upload": {
+          "type": "boolean"
+        },
+        "flag": {
+          "type": "string"
+        },
+        "lease_id": {
+          "type": "number"
+        },
+        "lease_metadata": {
+          "type": "object"
+        },
+        "count": {
+          "type": "number"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "user_id", "vape_id", "ip", "timestamp", "nft_token_id", "created_at", "pod_remaining", "pod_nicotine_level", "puff_duration", "updated_at"]
+  }
+}
